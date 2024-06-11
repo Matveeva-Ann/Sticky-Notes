@@ -1,0 +1,19 @@
+.createNotesHeader__wrapper {
+  position: fixed;
+  width: calc(100% - 6px);
+  background-color: #fff;
+}
+
+.createNotes__btnHidden {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 6px 16px;
+  float: right;
+  cursor: pointer;
+}
+
+.createNotes__title {
+  font-family: "Lato-Regular";
+  font-weight: 400;
+}

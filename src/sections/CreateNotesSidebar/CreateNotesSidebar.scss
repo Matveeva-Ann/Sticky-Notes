@@ -1,0 +1,59 @@
+.createNotesWrapper {
+  overflow: hidden;
+  position: fixed;
+  width: 300px;
+  height: 100vh;
+  background-color: #fff;
+  padding: 6px;
+  transform: translateX(-270px);
+}
+
+.opening {
+  overflow-y: scroll;
+  animation: open 550ms ease-out forwards;
+}
+
+@keyframes open {
+  0% {
+    transform: translateX(-270px);
+  }
+  100% {
+    transform: translateX(0px);
+    overflow-y: scroll;
+  }
+}
+
+.closing {
+  overflow-y: hidden;
+  animation: close 550ms ease-out forwards;
+}
+
+@keyframes close {
+  0% {
+    transform: translateX(-0px);
+  }
+  100% {
+    transform: translateX(-270px);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+}
+
+.closingContent {
+  animation: closeContent 550ms ease-out forwards;
+}
+@keyframes closeContent {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.createNotes__arrow {
+  font-size: 24px;
+}

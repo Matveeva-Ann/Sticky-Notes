@@ -1,0 +1,15 @@
+.filterNotes__fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: none;
+  padding: 10px;
+}
+
+.filterNotes__fieldset + .filterNotes__fieldset {
+  border-top: 1px solid #BEBEBE;
+}
+
+.filterNotes__form {
+    margin: 10px 0;
+}

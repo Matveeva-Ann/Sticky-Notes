@@ -1,20 +1,19 @@
 import AddNote from "./AddNote/AddNote";
-import './CreateNotes.scss';
+import "./CreateNotes.scss";
 
-export default function CreateNotes () {
+interface CreateNotesProps {
+  setIsShownSection: () => void;
+}
 
-    return(
- 
-            <ul className="createNotes__list">
-                <li><AddNote noteColor='lightSalad'></AddNote></li>
-                <li><AddNote noteColor='lightBlue'></AddNote></li>
-                <li><AddNote noteColor='lightPeach'></AddNote></li>
-                <li><AddNote noteColor='lightLavender'></AddNote></li>
-                <li><AddNote noteColor='lightPurple'></AddNote></li>
-                <li><AddNote noteColor='lightGray'></AddNote></li>
-                <li><AddNote noteColor='lightPink'></AddNote></li>
-                <li><AddNote noteColor='lightCoral'></AddNote></li>
-            </ul>
-   
-    )
+export default function CreateNotes({ setIsShownSection }: CreateNotesProps) {
+    const colorsArr = ['lightSalad', 'lightBlue', 'lightPeach', 'lightLavender', 'lightPurple', 'lightGray', 'lightPink', 'lightCoral']
+  return (
+    <ul className="createNotes__list">
+        {colorsArr.map((color, item) => (
+            <li key={item}>
+                 <AddNote noteColor={color} setIsShownSection={setIsShownSection}></AddNote>
+            </li>
+        ))}
+    </ul>
+  );
 }

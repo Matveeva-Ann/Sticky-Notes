@@ -13,26 +13,28 @@ export default function CreateNotesSidebar() {
   return (
     <>
       <section
-        className={`createNotesWrapper ${isShownSection ? "opening" : "closing"}`}
+        className={`createNotesWrapper ${
+          isShownSection ? "opening" : "closing"
+        }`}
       >
-          <div className={`${!isShownSection ? "closingContent" : ""}`}>
-            <CreateNotesHeader
-              onClick={() => setIsShownSection(false)}
-            ></CreateNotesHeader>
+        <div className={`${!isShownSection ? "closingContent" : ""}`}>
+          <CreateNotesHeader
+            onClick={() => setIsShownSection(false)}
+          ></CreateNotesHeader>
 
-            <SubTitle>Notes</SubTitle>
-            <CreateNotes></CreateNotes>
-            <SubTitle>Filter</SubTitle>
-            <FilterNotes></FilterNotes>
-            <SubTitle>Choose your background</SubTitle>
-            <ChooseBackground></ChooseBackground>
-          </div>
+          <SubTitle>Notes</SubTitle>
+          <CreateNotes setIsShownSection={()=>setIsShownSection(false)}></CreateNotes>
+          <SubTitle>Filter</SubTitle>
+          <FilterNotes></FilterNotes>
+          <SubTitle>Choose your background</SubTitle>
+          <ChooseBackground></ChooseBackground>
+        </div>
 
-          {!isShownSection && (
-            <HiddenCreateNotes
-              onClick={() => setIsShownSection(true)}
-            ></HiddenCreateNotes>
-          )}
+        {!isShownSection && (
+          <HiddenCreateNotes onClick={() => setIsShownSection(true)}>
+            Open Create Notes
+          </HiddenCreateNotes>
+        )}
       </section>
     </>
   );

@@ -10,13 +10,15 @@ interface ModalProps {
 export default function Modal({ children, close }: ModalProps) {
   const modalRoot = document.getElementById("modal-root");
 
-  function closeModal(e:React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  function closeModal(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     e.target === e.currentTarget && close();
   }
 
   return createPortal(
     <div className="modalBG" onClick={(e) => closeModal(e)}>
-      <div className="modalContent">{children}</div>
+      <div className="modalContent">
+        {children}
+      </div>
     </div>,
     modalRoot as Element
   );

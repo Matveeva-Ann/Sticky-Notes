@@ -4,13 +4,14 @@ import { useDispatch } from "react-redux";
 import { Note } from "../../../types/note";
 import { addNote } from "../../../redux/notesSlica";
 import { useState } from "react";
-import ModalCreateNote from "../../Modal/Modals/ModalCreateNote";
+import ModalCreateNote from "../../Modal/ModalCreateNote/ModalCreateNote";
 
 interface AddNoteProps {
   noteColor: string;
+  setIsShownSection: ()=>void;
 }
 
-export default function AddNote({ noteColor }: AddNoteProps) {
+export default function AddNote({ noteColor, setIsShownSection }: AddNoteProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
 
@@ -26,6 +27,7 @@ export default function AddNote({ noteColor }: AddNoteProps) {
     };
     dispatch(addNote(newNote));
     setIsModalOpen(false);
+    setIsShownSection();
   }
   return (
     <>
@@ -35,7 +37,7 @@ export default function AddNote({ noteColor }: AddNoteProps) {
       >
         <CiSquarePlus className="addNote__plus" />
       </div>
-      {isModalOpen && <ModalCreateNote closeModal={()=>setIsModalOpen(false)} addNewNote={(e)=>addNewNote(e)}></ModalCreateNote>}
+      {isModalOpen && <ModalCreateNote noteColor={noteColor} closeModal={()=>setIsModalOpen(false)} addNewNote={(e)=>addNewNote(e)}></ModalCreateNote>}
     </>
   );
 }

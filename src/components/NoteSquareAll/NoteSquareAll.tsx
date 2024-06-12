@@ -1,4 +1,4 @@
-import { colorsArr } from "../CreateNotes/colorsArr";
+import { colorsArr } from "../../utils/colorsArr";
 import NoteSquare from "../NoteSquare/NoteSquare";
 import "./NoteSquareAll.scss";
 
@@ -14,8 +14,8 @@ export default function NoteSquareAll({
       {colorsArr.map((color, item) => (
         <li key={item}>
           <NoteSquare
-            noteColor={color}
-            handleClickSquare={() => handleClickSquare(color)}
+            noteColor={color.value}
+            handleClickSquare={() => handleClickSquare(color.value)}
           ></NoteSquare>
         </li>
       ))}

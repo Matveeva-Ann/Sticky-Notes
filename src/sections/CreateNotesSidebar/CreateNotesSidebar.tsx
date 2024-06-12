@@ -21,7 +21,7 @@ export default function CreateNotesSidebar() {
       <section
          className={`createNotesWrapper ${isUserToggled ? (isShownSection ? "opening" : "closing") : ""}`}
       >
-        <div className={`${!isShownSection ? "closingContent" : ""}`}>
+        <div className={!isShownSection ? "closingContent" : ""}>
           <CreateNotesHeader
             onClick={() => handelClick(false)}
           ></CreateNotesHeader>

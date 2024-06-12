@@ -12,8 +12,14 @@ const filterDataSlice = createSlice({
     addFilterParam(_, { payload }) {
       return payload;
     },
+    resetColors(state) {
+      return {...state, colors: []}
+    },
+    resetFavorite(state) {
+      return {...state, isFavorite: null}
+    }
   },
 });
 
-export const { addFilterParam } = filterDataSlice.actions;
+export const { addFilterParam, resetColors, resetFavorite } = filterDataSlice.actions;
 export const filterDataReducer = filterDataSlice.reducer;

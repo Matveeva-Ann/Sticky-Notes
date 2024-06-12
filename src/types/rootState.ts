@@ -1,7 +1,7 @@
 import { Note } from "./note";
 
-interface FilterState {
-  colors: [],
+export interface FilterState {
+  colors: Array<string>,
   isFavorite: boolean | null 
 }
 export interface RootState {

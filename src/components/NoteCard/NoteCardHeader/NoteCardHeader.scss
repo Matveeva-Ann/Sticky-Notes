@@ -1,17 +1,18 @@
 .noteCardHeader {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid #bebebe;
   padding: 4px 6px;
 }
 .noteCardHeader__actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
 
 .noteCardHeader__actionsItem {
-  font-size: 18px;
+  font-size: 22px;
   cursor: pointer;
 
   &:hover {
@@ -23,10 +24,10 @@
   display: flex;
   align-items: center;
   justify-content: end;
-  padding: 0 4px;
+  padding: 4px;
   cursor: pointer;
 }
 
 .noteCard__favoriteIcon {
-  font-size: 18px;
+  font-size: 22px;
 }

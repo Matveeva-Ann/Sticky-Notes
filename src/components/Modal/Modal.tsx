@@ -18,7 +18,7 @@ export default function Modal({ children, close, color, modalSize }: ModalProps)
   }
 
   return createPortal(
-    <div className="modalBG" onClick={(e) => closeModal(e)}>
+    <div className="modalBG" onMouseDown={(e) => closeModal(e)}>
       <div className="modalContent__wrapper">
         <div className={`modalContent ${color} ${modalSize}`}>
           <button

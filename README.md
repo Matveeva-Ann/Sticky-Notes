@@ -1,30 +1,21 @@
-# React + TypeScript + Vite
+# Web Application "Notes" 📝🖥️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+View the project: **[https://sticky-notes](https://sticky-notes-71iy.onrender.com/)**
 
-Currently, two official plugins are available:
+## Used Technologies ⚙️:
+- React.js
+- TypeScript
+- SCSS
+- Redux Toolkit
+- Redux Persist
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## About the Project 💻
+This project is a web application designed for creating, editing, deleting, and managing notes. It provides features such as creating, editing, and deleting notes, changing the background and text color of notes, adding notes to favorites, and filtering notes.
 
-## Expanding the ESLint configuration
+## Functionality:
+- Users can create, edit, and delete notes.
+- Users can change the background and note color.
+- Users can mark notes as favorites.
+- Users can rearrange the order of notes.
+- Users can filter notes by status and color.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list

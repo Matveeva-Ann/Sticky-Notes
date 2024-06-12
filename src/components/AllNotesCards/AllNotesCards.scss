@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  width: calc(100vw - 76px);
 }
 
 .noNotes {
@@ -12,8 +13,17 @@
   min-height: 100vh;
 }
 
+.noNotes__shadow {
+  background-color: #ffffff60;
+  border-radius: 10px;
+  padding: 0 6px;
+  box-shadow: 2px 2px 45px 0px #ffffffb9;
+}
+
 .noNotes__text {
   font-size: 72px;
+  text-shadow: 2px 1px 35px rgba(253, 253, 253, 0.7);
+  font-family: "Lato-Regular";
   background: linear-gradient(
     90deg,
     rgba(15, 12, 41, 1) 0%,

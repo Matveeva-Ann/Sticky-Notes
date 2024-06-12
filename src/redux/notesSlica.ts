@@ -22,9 +22,7 @@ const notesSlice = createSlice({
         note.isFavorite = !note.isFavorite;
       }
     },
-    changeNote(state, { payload }) {
-      console.log(payload);
-      
+    changeNote(state, { payload }) {      
       const { id, title, text, color } = payload;
       const note = state.find(note => note.id === id);
       if (note) {

@@ -9,21 +9,27 @@ import CreateNotesHeader from "../../components/NotesHeader/NotesHeader";
 
 export default function CreateNotesSidebar() {
   const [isShownSection, setIsShownSection] = useState(false);
+  const [isUserToggled, setIsUserToggled] = useState(false);
+
+  function handelClick (action: boolean) {
+    setIsUserToggled(true);
+    setIsShownSection(action)
+  }
 
   return (
     <>
       <section
-        className={`createNotesWrapper ${
-          isShownSection ? "opening" : "closing"
-        }`}
+         className={`createNotesWrapper ${isUserToggled ? (isShownSection ? "opening" : "closing") : ""}`}
       >
         <div className={`${!isShownSection ? "closingContent" : ""}`}>
           <CreateNotesHeader
-            onClick={() => setIsShownSection(false)}
+            onClick={() => handelClick(false)}
           ></CreateNotesHeader>
 
           <SubTitle>Notes</SubTitle>
-          <CreateNotes setIsShownSection={()=>setIsShownSection(false)}></CreateNotes>
+          <CreateNotes
+            setIsShownSection={() => handelClick(false)}
+          ></CreateNotes>
           <SubTitle>Filter</SubTitle>
           <FilterNotes></FilterNotes>
           <SubTitle>Choose your background</SubTitle>
@@ -31,7 +37,7 @@ export default function CreateNotesSidebar() {
         </div>
 
         {!isShownSection && (
-          <HiddenCreateNotes onClick={() => setIsShownSection(true)}>
+          <HiddenCreateNotes onClick={() => handelClick(true)}>
             Open Create Notes
           </HiddenCreateNotes>
         )}

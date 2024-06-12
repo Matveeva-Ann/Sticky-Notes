@@ -11,7 +11,7 @@ export default function NoteCard({ data }: NoteCardProps) {
     return (
         <div className={`noteCard ${data.color}`}>
             <NoteCardHeader data={data}></NoteCardHeader>
-            <p className='noteCard__text'>{data.text.length < 230 ? data.text : (data.text.slice(0, 227) + '...')}</p>
+            <p className='noteCard__text'>{data.text.length < 360 ? data.text : (data.text.slice(0, 357) + '...')}</p>
         </div>
     )
 }

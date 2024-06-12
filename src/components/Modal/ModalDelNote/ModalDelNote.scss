@@ -1,0 +1,30 @@
+.modalDelNote__title {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.modalDelNote__text {
+  font-size: 18px;
+  text-align: justify;
+  margin-bottom: 18px;
+}
+
+.modalDelNote__btnWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modalDelNote__btn {
+  padding: 4px 8px;
+  min-width: 100px;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid gray;
+}
+
+.modalDelNote__btn + .modalDelNote__btn {
+  background-color: black;
+  color: #fff;
+}

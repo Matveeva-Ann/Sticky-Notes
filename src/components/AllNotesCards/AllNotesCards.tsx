@@ -4,6 +4,7 @@ import { RootState } from "../../types/rootState";
 import { useEffect, useState } from "react";
 import { Note } from "../../types/note";
 import NoteCard from "../NoteCard/NoteCard";
+import NoNotes from "./NoNotes";
 
 export default function AllNotesCards() {
   const [allNotes, setAllNotes] = useState<Note[]>([]);
@@ -12,15 +13,17 @@ export default function AllNotesCards() {
   useEffect(() => {
     setAllNotes(notes);
     console.log(notes);
-    
   }, [notes]);
 
   return (
     <div className="allNotesCards">
-      {allNotes.length !== 0 &&
+      {allNotes.length !== 0 ? (
         allNotes.map((item: Note, index) => (
           <NoteCard data={item} key={index}></NoteCard>
-        ))}
+        ))
+      ) : (
+        <NoNotes></NoNotes>
+      )}
     </div>
   );
 }

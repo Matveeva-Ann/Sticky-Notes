@@ -76,7 +76,10 @@ export default function ModalNote({
           onChange={handleTextChange}
         ></textarea>
 
-        <NoteSquareAll handleClickSquare={handleClickSquare}></NoteSquareAll>
+      <div className="modalNote__NoteSquareWrapper">
+      <NoteSquareAll handleClickSquare={handleClickSquare}></NoteSquareAll>
+
+      </div>
 
         <button className="modalCreateNote__btnSave" type="submit">
           Save

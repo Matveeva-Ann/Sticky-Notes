@@ -16,11 +16,14 @@ export default function FilterNotes() {
 
   function changeParams(e: React.FormEvent<HTMLFormElement>) {
     const formData = new FormData(e.currentTarget);
-    const target = e.target as HTMLInputElement;
+
+    const favoriteValueString = formData.get("favorite");
+    const favoriteValue = favoriteValueString !== null ? JSON.parse(favoriteValueString as string) : null;
+    const isFavorite: boolean | null = filters.isFavorite === favoriteValue ? filters.isFavorite : favoriteValue;
 
     const dataFilters = {
       colors: formData.getAll("color"),
-      isFavorite: target.value === "favorite" ? true : false,
+      isFavorite: isFavorite,
     };
 
     dispatch(addFilterParam(dataFilters));
@@ -49,26 +52,30 @@ export default function FilterNotes() {
           <input
             className="checkbox__input"
             type="radio"
-            value="favorite"
+            value="true"
             name="favorite"
             id="favorite"
             checked={filters.isFavorite === true}
           />
           <span className="checkbox__checked checkbox__checked--black "></span>
-          <label htmlFor="favorite" className="checkbox__label">Favorite</label>
+          <label htmlFor="favorite" className="checkbox__label">
+            Favorite
+          </label>
         </div>
 
         <div className="checkbox__wrapper">
           <input
             type="radio"
-            value="noFavorite"
+            value="false"
             className="checkbox__input"
             name="favorite"
             id="noFavorite"
             checked={filters.isFavorite === false}
           />
           <span className="checkbox__checked checkbox__checked--black "></span>
-          <label htmlFor="noFavorite"  className="checkbox__label">Not Favorite</label>
+          <label htmlFor="noFavorite" className="checkbox__label">
+            Not Favorite
+          </label>
         </div>
       </fieldset>
       <fieldset className="filterNotes__fieldset" name="colorsFieldset">
@@ -91,11 +98,7 @@ export default function FilterNotes() {
               checked={filters.colors.includes(color.value)}
             />
             <span className={`checkbox__checked ${color.value}`}></span>
-            <label
-              className="checkbox__label"
-             
-              htmlFor={color.value}
-            >
+            <label className="checkbox__label" htmlFor={color.value}>
               {color.name}
             </label>
           </div>

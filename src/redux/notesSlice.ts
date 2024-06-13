@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Note } from "../types/note";
 
-export const initialState: Note[] = [];
+export const initialState = (): Note[] => [];
 
 const notesSlice = createSlice({
   name: "notes",
@@ -11,20 +11,18 @@ const notesSlice = createSlice({
       return [...state, payload];
     },
     deleteNote(state, { payload }) {
-      const updatedNotes = state.filter((note) => note.id !== payload);      
+      const updatedNotes = state.filter((note) => note.id !== payload);
       return updatedNotes;
     },
     toggleFavorite(state, { payload }) {
-      const note = state.find(note => note.id === payload);
-      console.log(note);
-      
+      const note = state.find((note) => note.id === payload);
       if (note) {
         note.isFavorite = !note.isFavorite;
       }
     },
-    changeNote(state, { payload }) {      
+    changeNote(state, { payload }) {
       const { id, title, text, color } = payload;
-      const note = state.find(note => note.id === id);
+      const note = state.find((note) => note.id === id);
       if (note) {
         note.title = title;
         note.text = text;
@@ -34,5 +32,6 @@ const notesSlice = createSlice({
   },
 });
 
-export const { addNote, deleteNote, toggleFavorite, changeNote } = notesSlice.actions;
+export const { addNote, deleteNote, toggleFavorite, changeNote } =
+  notesSlice.actions;
 export const notesSliceReducer = notesSlice.reducer;

@@ -9,7 +9,7 @@ import {
   changeNote,
   deleteNote,
   toggleFavorite,
-} from "../../../redux/notesSlica";
+} from "../../../redux/notesSlice";
 import { useState } from "react";
 import ModalNoteDetails from "../../Modal/ModalNoteDetails/ModalNoteDetails";
 import ModalDelNote from "../../Modal/ModalDelNote/ModalDelNote";
@@ -48,7 +48,7 @@ export default function NoteCardHeader({ data }: NoteCardHeaderProps) {
   return (
     <div className="noteCardHeader">
       <h3>{data.title.length < 14 ? data.title : (data.title.substring(0, 12) + '...')}</h3>
-      <div className="noteCardHeader__actions">
+      <div className={`noteCardHeader__actions ${data.color}`}>
         <div
           className="noteCard__favorite"
           onClick={() => dispatch(toggleFavorite(data.id))}

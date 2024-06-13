@@ -3,9 +3,17 @@ import "./App.css";
 import CreateNotesSidebar from "./sections/CreateNotesSidebar/CreateNotesSidebar";
 import { RootState } from "./types/rootState";
 import AllNotesSection from "./sections/AllNotesSection/AllNotesSection";
+import { useState } from "react";
 
 function App() {
   const background = useSelector((state:RootState) => state.reducer.background);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isUserToggled, setIsUserToggled] = useState(false);
+
+  function handelClick (action: boolean) {
+    setIsUserToggled(true);
+    setIsSidebarOpen(action)
+  }
 
   return (
     <div
@@ -14,8 +22,8 @@ function App() {
         backgroundImage: `url(${background})`,
       }}
     >
-      <CreateNotesSidebar></CreateNotesSidebar>
-      <AllNotesSection></AllNotesSection>
+      <CreateNotesSidebar isSidebarOpen={isSidebarOpen} isUserToggled={isUserToggled} handelClick={handelClick}></CreateNotesSidebar>
+      <AllNotesSection isSidebarOpen={isSidebarOpen} isUserToggled={isUserToggled}></AllNotesSection>
     </div>
   );
 }

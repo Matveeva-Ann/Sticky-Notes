@@ -8,12 +8,19 @@
   font-size: 18px;
   text-align: justify;
   margin-bottom: 18px;
+
+  @media (width < 270px) {
+    font-size: 16px;
+    line-height: 18px;
+  }
 }
 
 .modalDelNote__btnWrapper {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .modalDelNote__btn {
@@ -22,6 +29,10 @@
   cursor: pointer;
   background-color: #fff;
   border: 1px solid gray;
+
+  @media (width < 270px) {
+    width: 100%;
+  }
 }
 
 .modalDelNote__btn + .modalDelNote__btn {

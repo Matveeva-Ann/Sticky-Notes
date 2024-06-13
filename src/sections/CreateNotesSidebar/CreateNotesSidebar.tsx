@@ -1,5 +1,4 @@
 import "./CreateNotesSidebar.scss";
-import { useState } from "react";
 import HiddenCreateNotes from "../../components/HiddenCreateNotes/HiddenCreateNotes";
 import SubTitle from "../../components/SubTitle/SubTitle";
 import CreateNotes from "../../components/CreateNotes/CreateNotes";
@@ -7,21 +6,20 @@ import FilterNotes from "../../components/FilterNotes/FilterNotes";
 import ChooseBackground from "../../components/ChooseBackground/ChooseBackground";
 import CreateNotesHeader from "../../components/NotesHeader/NotesHeader";
 
-export default function CreateNotesSidebar() {
-  const [isShownSection, setIsShownSection] = useState(false);
-  const [isUserToggled, setIsUserToggled] = useState(false);
+interface CreateNotesSidebarProps {
+  isSidebarOpen: boolean;
+  handelClick: (isOpen: boolean) => void;
+  isUserToggled: boolean
+}
 
-  function handelClick (action: boolean) {
-    setIsUserToggled(true);
-    setIsShownSection(action)
-  }
+export default function CreateNotesSidebar({isSidebarOpen, handelClick, isUserToggled}:CreateNotesSidebarProps) {
 
   return (
     <>
       <section
-         className={`createNotesWrapper ${isUserToggled ? (isShownSection ? "opening" : "closing") : ""}`}
+         className={`createNotesWrapper ${isUserToggled ? (isSidebarOpen ? "opening" : "closing") : ""}`}
       >
-        <div className={!isShownSection ? "closingContent" : ""}>
+        <div className={!isSidebarOpen ? "closingContent" : ""}>
           <CreateNotesHeader
             onClick={() => handelClick(false)}
           ></CreateNotesHeader>
@@ -36,7 +34,7 @@ export default function CreateNotesSidebar() {
           <ChooseBackground></ChooseBackground>
         </div>
 
-        {!isShownSection && (
+        {!isSidebarOpen && (
           <HiddenCreateNotes onClick={() => handelClick(true)}>
             Open Create Notes
           </HiddenCreateNotes>

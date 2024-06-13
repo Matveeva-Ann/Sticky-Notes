@@ -5,7 +5,6 @@ const backgroundSlice = createSlice({
   initialState: '',
   reducers: {
     changeBg(_, action) {       
-      console.log(action.payload);
       return action.payload;
     },
   },

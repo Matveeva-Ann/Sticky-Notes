@@ -1,6 +1,11 @@
-.createNotes__list {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin: 50px 0 20px;
+.createNotes__SquareAllWrapper {
+  margin: 50px 0 20px;
+
+  @media (width < 770px) {
+    margin: 40px 0 15px;
+  }
+
+  @media (width < 450px) {
+    margin: 30px 0 10px;
+  }
 }

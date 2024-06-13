@@ -1,12 +1,18 @@
 import "./AllNotesSection.scss";
 import AllNotesCards from "../../components/AllNotesCards/AllNotesCards";
 
-export default function AllNotesSection() {
-  
+interface AllNotesSectionProps {
+  isSidebarOpen: boolean;
+  isUserToggled: boolean;
+}
+
+export default function AllNotesSection({
+  isSidebarOpen,
+  isUserToggled,
+}: AllNotesSectionProps) {
   return (
     <section className="allNotes">
-      <h2 className="allNotesSection__title">Your Notes Board</h2>
-      <AllNotesCards></AllNotesCards>
+      <AllNotesCards isSidebarOpen={isSidebarOpen} isUserToggled={isUserToggled}></AllNotesCards>
     </section>
   );
 }

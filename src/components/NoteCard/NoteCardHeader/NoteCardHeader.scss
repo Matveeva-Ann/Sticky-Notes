@@ -1,4 +1,5 @@
 .noteCardHeader {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,6 +7,8 @@
   padding: 4px 6px;
 }
 .noteCardHeader__actions {
+  position: absolute;
+  right: 10px;
   display: flex;
   align-items: center;
   gap: 6px;

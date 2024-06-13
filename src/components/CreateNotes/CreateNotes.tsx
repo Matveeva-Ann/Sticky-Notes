@@ -2,7 +2,7 @@ import { useState } from "react";
 import NoteSquareAll from "../NoteSquareAll/NoteSquareAll";
 import "./CreateNotes.scss";
 import ModalNote from "../Modal/ModalNote/ModalNote";
-import { addNote } from "../../redux/notesSlica";
+import { addNote } from "../../redux/notesSlice";
 import { useDispatch } from "react-redux";
 import { Note } from "../../types/note";
 
@@ -42,9 +42,10 @@ export default function CreateNotes({ setIsShownSection }: CreateNotesProps) {
 
   return (
     <>
-      <NoteSquareAll
+    <div className="createNotes__SquareAllWrapper"> <NoteSquareAll
         handleClickSquare={handleClickSquare}
-      ></NoteSquareAll>
+      ></NoteSquareAll></div>
+     
       {isModalOpen && (
         <ModalNote
           noteColor={noteColor}

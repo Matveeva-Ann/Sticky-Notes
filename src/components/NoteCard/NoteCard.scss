@@ -1,8 +1,10 @@
 .noteCard {
-  width: 250px;
+  max-width: 250px;
+  width: 100%;
   height: 300px;
   border-radius: 6px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .noteCard__text {

@@ -2,7 +2,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
 import { backgroundReducer } from "./backgroundSlice";
-import { notesSliceReducer } from "./notesSlica";
+import { notesSliceReducer } from "./notesSlice";
 import { filterDataReducer } from "./filterDataSlice";
 
 const persistConfig = {

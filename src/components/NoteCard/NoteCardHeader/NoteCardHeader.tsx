@@ -26,8 +26,6 @@ export default function NoteCardHeader({ data }: NoteCardHeaderProps) {
 
   function updateNote(e: React.FormEvent<HTMLFormElement>, color: string) {
     const formData = new FormData(e.currentTarget);
-
-    console.log(color);
     
     const newNote: Note = {
       color: color,

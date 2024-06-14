@@ -5,6 +5,7 @@ import ModalNote from "../Modal/ModalNote/ModalNote";
 import { addNote } from "../../redux/notesSlice";
 import { useDispatch } from "react-redux";
 import { Note } from "../../types/note";
+import { v4 as uuidv4 } from "uuid";
 
 interface CreateNotesProps {
   setIsShownSection: () => void;
@@ -12,8 +13,8 @@ interface CreateNotesProps {
 
 export default function CreateNotes({ setIsShownSection }: CreateNotesProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [noteColor, setNoteColor] = useState('');
-  
+  const [noteColor, setNoteColor] = useState("");
+
   const dispatch = useDispatch();
 
   function addNewNote(e: React.FormEvent<HTMLFormElement>, noteColor: string) {
@@ -28,24 +29,25 @@ export default function CreateNotes({ setIsShownSection }: CreateNotesProps) {
       title: formData.get("title")
         ? (formData.get("title") as string)
         : "Title",
-      id: Math.round(Math.random() * 100000),
+      id: uuidv4(),
     };
+
     dispatch(addNote(newNote));
     setIsModalOpen(false);
     setIsShownSection();
   }
 
-  function handleClickSquare (color: string) {
+  function handleClickSquare(color: string) {
     setIsModalOpen(true);
-    setNoteColor(color);    
+    setNoteColor(color);
   }
 
   return (
     <>
-    <div className="createNotes__SquareAllWrapper"> 
-      <NoteSquareAll handleClickSquare={handleClickSquare}></NoteSquareAll>
-    </div>
-     
+      <div className="createNotes__SquareAllWrapper">
+        <NoteSquareAll handleClickSquare={handleClickSquare}></NoteSquareAll>
+      </div>
+
       {isModalOpen && (
         <ModalNote
           noteColor={noteColor}

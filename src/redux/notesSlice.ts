@@ -29,12 +29,18 @@ const notesSlice = createSlice({
         note.color = color;
       }
     },
+    movedNotes (state, { payload }) {
+      const noteIndexFrom = state.findIndex((note)=> note.id === payload.from);
+      const noteIndexTo = state.findIndex((note)=> note.id === payload.to);
+      const [movedNote] = state.splice(noteIndexFrom, 1);
+      state.splice(noteIndexTo, 0, movedNote);
+    },
     changeNoteChangeOrder (_, { payload }) {
       return payload;
     }
   },
 });
 
-export const { addNote, deleteNote, toggleFavorite, changeNote, changeNoteChangeOrder } =
+export const { addNote, deleteNote, toggleFavorite, changeNote, changeNoteChangeOrder, movedNotes } =
   notesSlice.actions;
 export const notesSliceReducer = notesSlice.reducer;

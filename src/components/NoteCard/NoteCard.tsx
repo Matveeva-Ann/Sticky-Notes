@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import { Note } from "../../types/note";
 import "./NoteCard.scss";
 import NoteCardHeader from "./NoteCardHeader/NoteCardHeader";
+import { useDispatch } from "react-redux";
+import { movedNotes } from "../../redux/notesSlice";
 
 interface NoteCardProps {
   data: Note;
-  index: number;
-  moveCard: (dragIndex: number, hoverIndex: number) => void;
 }
-export default function NoteCard({ data, moveCard, index }: NoteCardProps) {
+
+export default function NoteCard({ data }: NoteCardProps) {
   const [isElemLive, setIsElemLive] = useState(false);
   const [isElemOver, setIsElemOver] = useState(false);
+  const dispatch = useDispatch();
 
   const dragStartHandler = (e: React.DragEvent<HTMLLIElement>) => {
-    e.dataTransfer.effectAllowed = "move";
-    e.dataTransfer.setData("text/plain", index.toString());
-
+    e.dataTransfer.effectAllowed = "move";    
+    e.dataTransfer.setData("noteId", data.id);
     setIsElemLive(true);
   };
 
@@ -29,8 +30,8 @@ export default function NoteCard({ data, moveCard, index }: NoteCardProps) {
   };
 
   const dropHandler = (e: React.DragEvent<HTMLLIElement>) => {
-    const dragIndex = Number(e.dataTransfer.getData("text/plain"));
-    moveCard(dragIndex, index);
+    const dragId: string = e.dataTransfer.getData("noteId");
+    dispatch(movedNotes({ from: dragId, to: data.id }));
     setIsElemOver(false);
   };
 
@@ -43,11 +44,11 @@ export default function NoteCard({ data, moveCard, index }: NoteCardProps) {
       className={`noteCard ${data.color} ${isElemLive ? "cardLive" : ""} ${
         isElemOver ? "isElemOver" : ""
       }`}
-      onDragStart={(e: React.DragEvent<HTMLLIElement>) => dragStartHandler(e)} //коли взяли картку
-      onDragLeave={dragLeaveHandler} //вийшли за межі картки
-      onDragEnd={dragEndHandler} //коли відпустили картку
-      onDragOver={(e: React.DragEvent<HTMLLIElement>) => dragOverHandler(e)} //коли знаходимось над елементом
-      onDrop={(e: React.DragEvent<HTMLLIElement>) => dropHandler(e)} //відпустили картку і відбувається подія
+      onDragStart={(e: React.DragEvent<HTMLLIElement>) => dragStartHandler(e)} 
+      onDragLeave={dragLeaveHandler}
+      onDragEnd={dragEndHandler}
+      onDragOver={(e: React.DragEvent<HTMLLIElement>) => dragOverHandler(e)} 
+      onDrop={(e: React.DragEvent<HTMLLIElement>) => dropHandler(e)}
       draggable
     >
       <NoteCardHeader data={data}></NoteCardHeader>

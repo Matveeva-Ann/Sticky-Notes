@@ -1,15 +1,23 @@
-import { createSelector } from "@reduxjs/toolkit";
-import { RootState } from "../types/rootState";
-import { findInArray } from "../utils/filters/findInArray";
-import { handleFlag } from "../utils/filters/handleFlag";
+import { createSelector } from '@reduxjs/toolkit';
+import { selectNotes } from './notes/selectors';
+import { selectFilters } from './filters/selectors';
+import { FilterType } from './filters/interfaces';
+import { containingFilter } from '../utils/filters/containingFilter';
+import { pickingFilter } from '../utils/filters/pickingFilter';
 
-export const filterSelector = (state: RootState) => state.reducer.filter;
-export const notesSelector = (state: RootState) => state.reducer.notes;
+export const selectVisibleNotes = createSelector([selectNotes, selectFilters], (notes, filters) => {
+  const filterItems = Object.values(filters);
+  return filterItems.reduce((acc, filter) => {
+    switch (filter.type) {
+      case FilterType.Containing:
+        if (!Array.isArray(filter.value)) return acc;
+        return containingFilter(acc, filter.value, filter.fieldName);
 
-export const selectNotesByFilter = createSelector(
-  [notesSelector, filterSelector],
-  (notes, filter) => {
-    const filteredColorNotes = findInArray(notes, filter.colors);
-    return handleFlag(filteredColorNotes, filter.isFavorite);
-  }
-);
+      case FilterType.Picking:
+        return pickingFilter(acc, filter.value, filter.fieldName);
+
+      default:
+        return acc;
+    }
+  }, notes);
+});

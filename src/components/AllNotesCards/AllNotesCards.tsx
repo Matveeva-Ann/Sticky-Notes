@@ -1,34 +1,22 @@
-import "./AllNotesCards.scss";
-import { useSelector } from "react-redux";
-import { Note } from "../../types/note";
-import NoteCard from "../NoteCard/NoteCard";
-import NoNotes from "./NoNotes";
-import { selectNotesByFilter } from "../../redux/selectors";
+import './AllNotesCards.scss';
+import NoteCard from '../NoteCard/NoteCard';
+import NoNotes from './NoNotes';
+import { useAppSelector } from '../../redux/hooks';
+import { selectVisibleNotes } from '../../redux/selectors';
 
 interface AllNotesCardsProps {
   isSidebarOpen: boolean;
   isUserToggled: boolean;
 }
 
-export default function AllNotesCards({
-  isSidebarOpen,
-  isUserToggled,
-}: AllNotesCardsProps) {
-  const visibleNotes = useSelector(selectNotesByFilter);
+export default function AllNotesCards({ isSidebarOpen, isUserToggled }: AllNotesCardsProps) {
+  const visibleNotes = useAppSelector(selectVisibleNotes);
 
   return (
     <>
       {visibleNotes && visibleNotes.length !== 0 ? (
-        <ul
-          className={`allNotesCards ${
-            isUserToggled
-              ? isSidebarOpen
-                ? "allNotes__open"
-                : "allNotes__close"
-              : ""
-          }`}
-        >
-          {visibleNotes.map((item: Note, index) => (
+        <ul className={`allNotesCards ${isUserToggled ? (isSidebarOpen ? 'allNotes__open' : 'allNotes__close') : ''}`}>
+          {visibleNotes.map((item, index) => (
             <NoteCard data={item} key={index}></NoteCard>
           ))}
         </ul>

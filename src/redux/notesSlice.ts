@@ -29,9 +29,12 @@ const notesSlice = createSlice({
         note.color = color;
       }
     },
+    changeNoteChangeOrder (_, { payload }) {
+      return payload;
+    }
   },
 });
 
-export const { addNote, deleteNote, toggleFavorite, changeNote } =
+export const { addNote, deleteNote, toggleFavorite, changeNote, changeNoteChangeOrder } =
   notesSlice.actions;
 export const notesSliceReducer = notesSlice.reducer;

@@ -16,7 +16,7 @@ export default function CreateNotes({ setIsShownSection }: CreateNotesProps) {
   
   const dispatch = useDispatch();
 
-  function addNewNote(e: React.FormEvent<HTMLFormElement>) {
+  function addNewNote(e: React.FormEvent<HTMLFormElement>, noteColor: string) {
     const formData = new FormData(e.currentTarget);
 
     const newNote: Note = {
@@ -42,17 +42,16 @@ export default function CreateNotes({ setIsShownSection }: CreateNotesProps) {
 
   return (
     <>
-    <div className="createNotes__SquareAllWrapper"> <NoteSquareAll
-        handleClickSquare={handleClickSquare}
-      ></NoteSquareAll></div>
+    <div className="createNotes__SquareAllWrapper"> 
+      <NoteSquareAll handleClickSquare={handleClickSquare}></NoteSquareAll>
+    </div>
      
       {isModalOpen && (
         <ModalNote
           noteColor={noteColor}
-          setNoteColor={setNoteColor}
           modalTitle="Create note"
           closeModal={() => setIsModalOpen(false)}
-          addNewNote={(e) => addNewNote(e)}
+          actionNote={addNewNote}
         ></ModalNote>
       )}
     </>

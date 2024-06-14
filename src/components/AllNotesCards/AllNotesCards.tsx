@@ -1,22 +1,27 @@
 import "./AllNotesCards.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../types/rootState";
 import { useEffect, useState } from "react";
 import { Note } from "../../types/note";
 import NoteCard from "../NoteCard/NoteCard";
 import NoNotes from "./NoNotes";
+import { changeNoteChangeOrder } from "../../redux/notesSlice";
 
 interface AllNotesCardsProps {
   isSidebarOpen: boolean;
   isUserToggled: boolean;
 }
 
-export default function AllNotesCards({isSidebarOpen, isUserToggled }: AllNotesCardsProps) {
+export default function AllNotesCards({
+  isSidebarOpen,
+  isUserToggled,
+}: AllNotesCardsProps) {
   const [allNotes, setAllNotes] = useState<Note[]>([]);
   const notes: Note[] = useSelector((state: RootState) => state.reducer.notes);
   const filterParams = useSelector((state: RootState) => state.reducer.filter);
+  const dispatch = useDispatch();
 
-  useEffect(() => {    
+  useEffect(() => {
     setAllNotes(notes);
   }, [notes]);
 
@@ -39,15 +44,38 @@ export default function AllNotesCards({isSidebarOpen, isUserToggled }: AllNotesC
     }
   }, [filterParams, notes]);
 
+  const moveCard = (dragIndex: number, hoverIndex: number) => {
+    const updatedNotes = [...notes];
+    const [movedNote] = updatedNotes.splice(dragIndex, 1);
+    updatedNotes.splice(hoverIndex, 0, movedNote);
+    
+    dispatch(changeNoteChangeOrder(updatedNotes));
+  };
+
   return (
-    <div className={`allNotesCards ${isUserToggled ? (isSidebarOpen ? 'allNotes__open' : 'allNotes__close') : ''}`}>
+    <>
       {allNotes.length !== 0 ? (
-        allNotes.map((item: Note, index) => (
-          <NoteCard data={item} key={index}></NoteCard>
-        ))
+        <ul
+          className={`allNotesCards ${
+            isUserToggled
+              ? isSidebarOpen
+                ? "allNotes__open"
+                : "allNotes__close"
+              : ""
+          }`}
+        >
+          {allNotes.map((item: Note, index) => (
+            <NoteCard
+              data={item}
+              key={index}
+              index={index}
+              moveCard={moveCard}
+            ></NoteCard>
+          ))}
+        </ul>
       ) : (
         <NoNotes></NoNotes>
       )}
-    </div>
+    </>
   );
 }

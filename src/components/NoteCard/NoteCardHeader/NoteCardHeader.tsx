@@ -22,12 +22,13 @@ export default function NoteCardHeader({ data }: NoteCardHeaderProps) {
   const [isModalDetailsOpen, setIsModalDetailsOpen] = useState(false);
   const [isModalDelOpen, setIsModalDelOpen] = useState(false);
   const [isModalEditOpen, setIsModalEditOpen] = useState(false);
-  const [color, setColor] = useState(data.color);
   const dispatch = useDispatch();
 
-  function updateNote(e: React.FormEvent<HTMLFormElement>) {
+  function updateNote(e: React.FormEvent<HTMLFormElement>, color: string) {
     const formData = new FormData(e.currentTarget);
 
+    console.log(color);
+    
     const newNote: Note = {
       color: color,
       text: formData.get("text") ? (formData.get("text") as string) : "Note Text",
@@ -89,8 +90,7 @@ export default function NoteCardHeader({ data }: NoteCardHeaderProps) {
           data={data}
           modalTitle="Edit the note"
           closeModal={() => setIsModalEditOpen(false)}
-          updateNote={(e)=>updateNote(e)}
-          setNoteColor={setColor}
+          actionNote={updateNote}
         ></ModalNote>
       )}
     </div>

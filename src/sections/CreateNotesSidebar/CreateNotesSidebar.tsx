@@ -9,15 +9,20 @@ import CreateNotesHeader from "../../components/NotesHeader/NotesHeader";
 interface CreateNotesSidebarProps {
   isSidebarOpen: boolean;
   handelClick: (isOpen: boolean) => void;
-  isUserToggled: boolean
+  isUserToggled: boolean;
 }
 
-export default function CreateNotesSidebar({isSidebarOpen, handelClick, isUserToggled}:CreateNotesSidebarProps) {
-
+export default function CreateNotesSidebar({
+  isSidebarOpen,
+  handelClick,
+  isUserToggled,
+}: CreateNotesSidebarProps) {
   return (
     <>
       <section
-         className={`createNotesWrapper ${isUserToggled ? (isSidebarOpen ? "opening" : "closing") : ""}`}
+        className={`createNotesWrapper ${
+          isUserToggled ? (isSidebarOpen ? "opening" : "closing") : ""
+        }`}
       >
         <div className={!isSidebarOpen ? "closingContent" : ""}>
           <CreateNotesHeader

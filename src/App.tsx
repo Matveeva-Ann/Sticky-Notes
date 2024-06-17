@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import "./App.css";
 import CreateNotesSidebar from "./sections/CreateNotesSidebar/CreateNotesSidebar";
-import { RootState } from "./types/rootState";
 import AllNotesSection from "./sections/AllNotesSection/AllNotesSection";
 import { useState } from "react";
+import { RootState } from "./redux/store";
 
 function App() {
   const background = useSelector((state:RootState) => state.reducer.background);

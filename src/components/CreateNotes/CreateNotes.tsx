@@ -2,10 +2,10 @@ import { useState } from "react";
 import NoteSquareAll from "../NoteSquareAll/NoteSquareAll";
 import "./CreateNotes.scss";
 import ModalNote from "../Modal/ModalNote/ModalNote";
-import { addNote } from "../../redux/notesSlice";
 import { useDispatch } from "react-redux";
-import { Note } from "../../types/note";
 import { v4 as uuidv4 } from "uuid";
+import { Colors, Note } from "../../redux/notes/interfaces";
+import { addNote } from "../../redux/notes";
 
 interface CreateNotesProps {
   setIsShownSection: () => void;
@@ -13,22 +13,18 @@ interface CreateNotesProps {
 
 export default function CreateNotes({ setIsShownSection }: CreateNotesProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [noteColor, setNoteColor] = useState("");
+  const [noteColor, setNoteColor] = useState<Colors>(Colors.Lavender);
 
   const dispatch = useDispatch();
 
-  function addNewNote(e: React.FormEvent<HTMLFormElement>, noteColor: string) {
+  function addNewNote(e: React.FormEvent<HTMLFormElement>, noteColor: Colors) {
     const formData = new FormData(e.currentTarget);
 
     const newNote: Note = {
       color: noteColor,
-      text: formData.get("text")
-        ? (formData.get("text") as string)
-        : "Note Text",
+      text: formData.get('text') ? (formData.get('text') as string) : 'Note Text',
       isFavorite: false,
-      title: formData.get("title")
-        ? (formData.get("title") as string)
-        : "Title",
+      title: formData.get('title') ? (formData.get('title') as string) : 'Title',
       id: uuidv4(),
     };
 
@@ -37,7 +33,7 @@ export default function CreateNotes({ setIsShownSection }: CreateNotesProps) {
     setIsShownSection();
   }
 
-  function handleClickSquare(color: string) {
+  function handleClickSquare(color: Colors) {
     setIsModalOpen(true);
     setNoteColor(color);
   }

@@ -1,27 +1,27 @@
 import Modal from "../Modal";
 import "./ModalNote.scss";
-import { Note } from "../../../types/note";
 import { useState } from "react";
 import NoteSquareAll from "../../NoteSquareAll/NoteSquareAll";
+import { Colors, Note } from "../../../redux/notes/interfaces";
 
 interface ModalNoteProps {
   closeModal: () => void;
-  noteColor?: string;
+  noteColor?: Colors;
   data?: Note;
   modalTitle: string;
-  actionNote: (e: React.FormEvent<HTMLFormElement>, noteColor: string) => void;
+  actionNote: (e: React.FormEvent<HTMLFormElement>, noteColor: Colors) => void;
 }
 
 export default function ModalNote({
   closeModal,
-  noteColor = "",
+  noteColor = Colors.Lavender,
   data,
   modalTitle,
   actionNote,
 }: ModalNoteProps) {
   const [title, setTitle] = useState(data ? data.title : "");
   const [text, setText] = useState(data ? data.text : "");
-  const [color, setColor] = useState(data ? data.color : noteColor);
+  const [color, setColor] = useState<Colors>(data ? data.color : noteColor);
 
 
   return (
@@ -56,7 +56,7 @@ export default function ModalNote({
 
         <div className="modalNote__NoteSquareWrapper">
           <NoteSquareAll
-            handleClickSquare={(color: string) => setColor(color)}
+            handleClickSquare={(color: Colors) => setColor(color)}
           ></NoteSquareAll>
         </div>
 

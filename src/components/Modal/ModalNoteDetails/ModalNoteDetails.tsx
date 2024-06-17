@@ -1,4 +1,4 @@
-import { Note } from "../../../types/note";
+import { Note } from "../../../redux/notes/interfaces";
 import Modal from "../Modal";
 import "./ModalNoteDetails.scss";
 

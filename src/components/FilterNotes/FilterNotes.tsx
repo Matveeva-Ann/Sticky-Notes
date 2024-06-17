@@ -1,50 +1,42 @@
-import { useDispatch, useSelector } from "react-redux";
-import "./FilterNotes.scss";
-import {
-  addFilterParam,
-  resetColors,
-  resetFavorite,
-} from "../../redux/filterDataSlice";
-import { colorsArr } from "../../utils/colorsArr";
-import { FilterState, RootState } from "../../types/rootState";
+import './FilterNotes.scss';
+import { COLORS } from '../../redux/notes/constants';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { selectFilters } from '../../redux/filters/selectors';
+import { useCallback } from 'react';
+import { addFilterColor, removeFilterColor, resetFilter, setFavorite } from '../../redux/filters';
+import { Favorite, FilterNames } from '../../redux/filters/interfaces';
+import { Colors } from '../../redux/notes/interfaces';
 
 export default function FilterNotes() {
-  const dispatch = useDispatch();
-  const filters = useSelector(
-    (state: RootState) => state.reducer.filter
-  ) as FilterState;
+  const dispatch = useAppDispatch();
+  const filters = useAppSelector(selectFilters);
 
-  function changeParams(e: React.FormEvent<HTMLFormElement>) {
-    const formData = new FormData(e.currentTarget);
+  const handleFavoriteChange = useCallback(
+    (value: Favorite) => {
+      dispatch(setFavorite(value));
+    },
+    [dispatch]
+  );
 
-    const favoriteValueString = formData.get("favorite");
-    const favoriteValue = favoriteValueString !== null ? JSON.parse(favoriteValueString as string) : null;
-    const isFavorite: boolean | null = filters.isFavorite === favoriteValue ? filters.isFavorite : favoriteValue;
+  const handleColorChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>, color: Colors) => {
+      if (event.target.checked) {
+        dispatch(addFilterColor(color));
+        return;
+      }
 
-    const dataFilters = {
-      colors: formData.getAll("color"),
-      isFavorite: isFavorite,
-    };
-
-    dispatch(addFilterParam(dataFilters));
-  }
-
-  function resetFilter(filterName: string) {
-    if (filterName === "colors") {
-      dispatch(resetColors());
-    }
-    if (filterName === "favorite") {
-      dispatch(resetFavorite());
-    }
-  }
+      dispatch(removeFilterColor(color));
+    },
+    [dispatch]
+  );
 
   return (
-    <form className="filterNotes__form" onChange={(e) => changeParams(e)}>
+    <form className="filterNotes__form">
       <fieldset className="filterNotes__fieldset" name="favoritesFieldset">
         <button
           type="button"
           className="filterNotes__resetBtn"
-          onClick={() => resetFilter("favorite")}
+          onClick={() => dispatch(resetFilter(FilterNames.favorite))}
         >
           reset filter
         </button>
@@ -55,7 +47,8 @@ export default function FilterNotes() {
             value="true"
             name="favorite"
             id="favorite"
-            checked={filters.isFavorite === true}
+            onChange={() => handleFavoriteChange(true)}
+            checked={filters.favorite.value === true}
           />
           <span className="checkbox__checked checkbox__checked--black "></span>
           <label htmlFor="favorite" className="checkbox__label">
@@ -70,7 +63,8 @@ export default function FilterNotes() {
             className="checkbox__input"
             name="favorite"
             id="noFavorite"
-            checked={filters.isFavorite === false}
+            onChange={() => handleFavoriteChange(false)}
+            checked={filters.favorite.value === false}
           />
           <span className="checkbox__checked checkbox__checked--black "></span>
           <label htmlFor="noFavorite" className="checkbox__label">
@@ -82,12 +76,12 @@ export default function FilterNotes() {
         <button
           type="button"
           className="filterNotes__resetBtn"
-          onClick={() => resetFilter("colors")}
+          onClick={() => dispatch(resetFilter(FilterNames.colors))}
         >
           reset filter
         </button>
 
-        {colorsArr.map((color, index) => (
+        {COLORS.map((color, index) => (
           <div className="checkbox__wrapper" key={index}>
             <input
               className="checkbox__input"
@@ -95,7 +89,8 @@ export default function FilterNotes() {
               id={color.value}
               value={color.value}
               name="color"
-              checked={filters.colors.includes(color.value)}
+              onChange={e => handleColorChange(e, color.value)}
+              checked={filters.colors.value.includes(color.value)}
             />
             <span className={`checkbox__checked ${color.value}`}></span>
             <label className="checkbox__label" htmlFor={color.value}>
